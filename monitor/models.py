@@ -54,3 +54,19 @@ class Target(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.status})"
+    
+
+class AlertRule(models.Model):
+    target = models.ForeignKey(Target, on_delete=models.CASCADE, related_name="alerts")
+    enabled = models.BooleanField(default=True)
+    
+    failure_threshold = models.PositiveIntegerField(
+        default=3,
+        help_text="Trigger alert after N consecutive failures"
+    )
+    
+    notify_email = models.EmailField(blank=True)
+    notify_webhook = models.CharField(max_length=1000, blank=True)
+
+    def __str__(self):
+        return f"Alert for {self.target.name}"
