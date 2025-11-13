@@ -96,12 +96,17 @@
         {% if services %}
             {% for service in services %}
             <div class="service-card">
-                <div class="status {% if service.status %}up{% else %}down{% endif %}"></div>
+                <div class="status"></div>
                 <div class="info">
                     <h3>{{ service.name }}</h3>
                     <p>{{ service.url }}</p>
                     <p>نوع: {{ service.get_type_display }} | فاصله چک: هر {{ service.interval }} دقیقه</p>
                     <p>آخرین چک: {{ service.last_checked|timesince }} پیش</p>
+                     {% if service.status %}
+                     <p>up</p>
+                     {% else %}
+                     <p>down</p>
+                     {% endif %}
                 </div>
                 <div class="actions">
                     <a href="{% url 'edit_service' service.pk %}">ویرایش</a>
