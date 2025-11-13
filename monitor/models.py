@@ -12,7 +12,6 @@ class Service(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='services')
     name = models.CharField(max_length=100)
     url = models.URLField(max_length=500, unique=True)
-    type = models.CharField(max_length=20, choices=TYPE_CHOICES, default='http')
     interval = models.PositiveIntegerField(default=5)
     is_active = models.BooleanField(default=True)
     status = models.BooleanField(default=True)
