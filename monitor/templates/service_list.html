@@ -1,4 +1,3 @@
-<!-- templates/monitoring/service_list.html -->
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -91,7 +90,7 @@
     <div class="container">
         <header>
             <h1>سرویس‌های من</h1>
-            <a href="{% url 'monitoring:add_service' %}" class="btn">افزودن سرویس</a>
+            <a href="{% url 'monitor:add_service' %}" class="btn">افزودن سرویس</a>
         </header>
 
         {% if services %}
@@ -105,14 +104,14 @@
                     <p>آخرین چک: {{ service.last_checked|timesince }} پیش</p>
                 </div>
                 <div class="actions">
-                    <a href="{% url 'monitoring:edit_service' service.pk %}">ویرایش</a>
-                    <a href="{% url 'monitoring:delete_service' service.pk %}">حذف</a>
+                    <a href="{% url 'monitor:edit_service' service.pk %}">ویرایش</a>
+                    <a href="{% url 'monitor:delete_service' service.pk %}">حذف</a>
                 </div>
             </div>
             {% endfor %}
         {% else %}
             <div class="empty">
-                هیچ سرویسی ثبت نشده. <a href="{% url 'monitoring:add_service' %}">اولین سرویس را اضافه کنید</a>
+                هیچ سرویسی ثبت نشده. <a href="{% url 'monitor:add_service' %}">اولین سرویس را اضافه کنید</a>
             </div>
         {% endif %}
     </div>
