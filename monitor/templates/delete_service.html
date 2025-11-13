@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>حذف سرویس</title>
+    <style>
+        body { background: #121212; color: white; font-family: sans-serif; padding: 40px; text-align: center; }
+        .card { background: #1e1e1e; padding: 30px; border-radius: 12px; max-width: 500px; margin: 0 auto; }
+        .btn { padding: 10px 20px; margin: 10px; border: none; border-radius: 8px; cursor: pointer; }
+        .danger { background: #cf6679; color: white; }
+        .cancel { background: #333; color: white; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h3>آیا از حذف سرویس زیر مطمئن هستید؟</h3>
+        <p><strong>{{ service.name }}</strong><br>{{ service.url }}</p>
+        <form method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn danger">بله، حذف کن</button>
+        </form>
+        <a href="{% url 'monitoring:service_list' %}" class="btn cancel">خیر، لغو</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!-- templates/monitoring/service_list.html -->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>سرویس‌های من</title>
+    <style>
+        :root {
+            --bg: #121212;
+            --card: #1e1e1e;
+            --text: #ffffff;
+            --up: #03dac6;
+            --down: #cf6679;
+            --accent: #bb86fc;
+        }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Vazirmatn', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: var(--accent);
+            margin: 0;
+        }
+        .btn {
+            padding: 10px 20px;
+            background: var(--accent);
+            color: black;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .btn:hover {
+            background: #985eff;
+        }
+        .service-card {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .status {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+        .status.up { background: var(--up); }
+        .status.down { background: var(--down); }
+        .info h3 {
+            margin: 0 0 8px 0;
+            color: var(--text);
+        }
+        .info p {
+            margin: 4px 0;
+            color: #aaa;
+            font-size: 14px;
+        }
+        .actions a {
+            margin-left: 10px;
+            color: #888;
+            text-decoration: none;
+        }
+        .actions a:hover {
+            color: var(--accent);
+        }
+        .empty {
+            text-align: center;
+            color: #888;
+            font-size: 18px;
+            margin: 60px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>سرویس‌های من</h1>
+            <a href="{% url 'monitoring:add_service' %}" class="btn">افزودن سرویس</a>
+        </header>
+
+        {% if services %}
+            {% for service in services %}
+            <div class="service-card">
+                <div class="status {% if service.status %}up{% else %}down{% endif %}"></div>
+                <div class="info">
+                    <h3>{{ service.name }}</h3>
+                    <p>{{ service.url }}</p>
+                    <p>نوع: {{ service.get_type_display }} | فاصله چک: هر {{ service.interval }} دقیقه</p>
+                    <p>آخرین چک: {{ service.last_checked|timesince }} پیش</p>
+                </div>
+                <div class="actions">
+                    <a href="{% url 'monitoring:edit_service' service.pk %}">ویرایش</a>
+                    <a href="{% url 'monitoring:delete_service' service.pk %}">حذف</a>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty">
+                هیچ سرویسی ثبت نشده. <a href="{% url 'monitoring:add_service' %}">اولین سرویس را اضافه کنید</a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -71,6 +71,11 @@
     </style>
 </head>
 <body>
+    {% if edit %}
+    <h2>ویرایش سرویس</h2>
+    {% else %}
+        <h2>افزودن سرویس جدید</h2>
+    {% endif %}
     <div class="container">
         <h2>افزودن سرویس جدید</h2>
         <form method="post">
