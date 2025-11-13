@@ -3,15 +3,10 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Service(models.Model):
-    TYPE_CHOICES = [
-        ('http', 'HTTP/HTTPS'),
-        ('container', 'Docker/Container'),
-        ('api', 'API'),
-    ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='services')
     name = models.CharField(max_length=100)
-    url = models.URLField(max_length=500, unique=True)
+    url = models.CharField(max_length=500, unique=True)
     interval = models.PositiveIntegerField(default=5)
     is_active = models.BooleanField(default=True)
     status = models.BooleanField(default=True)
