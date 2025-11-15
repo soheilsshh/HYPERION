@@ -6,6 +6,11 @@ class Service(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='services')
     name = models.CharField(max_length=100)
     url = models.CharField(max_length=500, unique=True)
+    
+    db_username = models.CharField(max_length=100, blank=True, null=True)
+    db_password = models.CharField(max_length=200, blank=True, null=True)
+    db_database = models.CharField(max_length=200, blank=True, null=True)
+
     interval = models.PositiveIntegerField(default=5)
     is_active = models.BooleanField(default=True)
     status = models.BooleanField(default=True)
