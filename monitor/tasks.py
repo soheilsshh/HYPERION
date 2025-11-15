@@ -50,8 +50,6 @@ def check_redis(parsed, service):
             host=parsed.hostname,
             port=parsed.port or 6379,
             db=int((parsed.path or "/0").replace("/", "")),
-            username=service.username or parsed.username,
-            password=service.password or parsed.password,
         )
         conn.ping()
         return True
@@ -67,9 +65,9 @@ def check_postgres(parsed, service):
 
     try:
         conn = psycopg2.connect(
-            dbname=service.database or parsed.path.replace("/", ""),
-            user=service.username or parsed.username,
-            password=service.password or parsed.password,
+            dbname=service.db_database or parsed.path.replace("/", ""),
+            user=service.db_username or parsed.username,
+            password=service.db_password or parsed.password,
             host=parsed.hostname,
             port=parsed.port or 5432,
             connect_timeout=3
@@ -89,9 +87,9 @@ def check_mysql(parsed, service):
     try:
         conn = pymysql.connect(
             host=parsed.hostname,
-            user=service.username or parsed.username,
-            password=service.password or parsed.password,
-            database=service.database or parsed.path.replace("/", ""),
+            user=service.db_username or parsed.username,
+            password=service.db_password or parsed.password,
+            database=service.db_database or parsed.path.replace("/", ""),
             port=parsed.port or 3306,
             connect_timeout=3
         )
@@ -111,8 +109,8 @@ def check_mongo(parsed, service):
         client = pymongo.MongoClient(
             host=parsed.hostname,
             port=parsed.port or 27017,
-            username=service.username or parsed.username,
-            password=service.password or parsed.password,
+            username=service.db_username or parsed.username,
+            password=service.db_password or parsed.password,
             serverSelectionTimeoutMS=3000
         )
         client.admin.command("ping")
