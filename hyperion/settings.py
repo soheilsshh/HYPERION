@@ -129,8 +129,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CELERY_BROKER_URL = 'redis://localhost:6379/1'
 CELERY_BEAT_SCHEDULE = {
-    'check-services-every-minute': {
-        'task': 'monitor.tasks.check_redis_services',
-        'schedule': crontab(minute='*'),  
+    'run-health-checks-every-minute': {
+        'task': 'monitor.tasks.run_periodic_health_checks',
+        'schedule': crontab(minute='*'),
     },
 }
