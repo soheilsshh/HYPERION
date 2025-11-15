@@ -134,3 +134,7 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(minute='*'),
     },
 }
+#mongodb://localhost:27017/testdb
+#mysql://root:rootpass@localhost:3306/testdb
+#postgres://testuser:testpass@localhost:5432/testdb
+#redis://localhost:6379/0
