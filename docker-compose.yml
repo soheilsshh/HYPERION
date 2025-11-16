@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+
+  redis:
+    image: redis
+    ports:
+      - "6300:6379"
+    restart: always
+
+  django:
+    build: .
+    container_name: hyperion_django
+    volumes:
+      - .:/app
+    ports:
+      - "8001:8001"
+    depends_on:
+      - redis
+    env_file:
+      - .env
+
+  celery:
+    build: .
+    container_name: hyperion_celery
+    command: celery -A hyperion worker -B --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - django
+      - redis
+    env_file:
+      - .env
