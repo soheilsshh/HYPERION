@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
 
   redis:
@@ -17,8 +15,6 @@ services:
       - "8001:8001"
     depends_on:
       - redis
-    env_file:
-      - .env
 
   celery:
     build: .
@@ -29,5 +25,3 @@ services:
     depends_on:
       - django
       - redis
-    env_file:
-      - .env
