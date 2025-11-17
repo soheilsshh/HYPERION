@@ -20,8 +20,8 @@ class Service(models.Model):
         return f"{self.name} ({self.url})"
 
     class Meta:
-        verbose_name = "سرویس"
-        verbose_name_plural = "سرویس‌ها"
+        verbose_name = "Service"
+        verbose_name_plural = "Service"
         indexes = [models.Index(fields=['url']), models.Index(fields=['is_active'])]
 
 
