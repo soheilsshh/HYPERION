@@ -8,7 +8,7 @@ services:
 
   django:
     build: .
-    container_name: hyperion_django
+    container_name: django
     volumes:
       - .:/app
     ports:
@@ -20,7 +20,7 @@ services:
 
   celery:
     build: .
-    container_name: hyperion_celery
+    container_name: celery
     command: >
       celery -A hyperion worker -B --loglevel=info
     volumes:
